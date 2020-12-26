@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  content: {
-    display: 'flex',
+  root: {
+    hegiht: '100vh',
   },
 }));
 
