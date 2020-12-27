@@ -1,21 +1,19 @@
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
   header: {
+    display: 'flex',
     height: '30px',
     marginTop: '10',
+    flexWrap: 'wrap',
+    alignItems: 'center',
   },
   link: {
-    color: '#fafafa',
     display: 'flex',
+    color: '#fafafa',
   },
-  icon: {
-    marginRight: theme.spacing(0.5),
-    width: 20,
-    height: 20,
+  btncolor: {
+    color: '#fafafa',
   }
 }));
 

@@ -1,0 +1,12 @@
+html, body {
+  height: 100vh;
+  background-color: #1A1A1A;
+}
+
+.MuiBreadcrumbs-separator {
+  color: #fafafa;
+}
+
+.MuiSvgIcon-root {
+  color: #fafafa;
+}
