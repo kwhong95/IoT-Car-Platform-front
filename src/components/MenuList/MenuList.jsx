@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { createMuiTheme, Menu, MenuItem, ThemeProvider } from '@material-ui/core';
 
 import useStyles from './styles';
@@ -11,8 +12,14 @@ const theme = createMuiTheme({
       },
       list: {
         color: '#fafafa',
-      }
+      },
     },
+    MuiButtonBase: {
+      root: {
+        color: '#fafafa',
+        border: 'none'
+      }
+    }
   }
 })
 
@@ -23,12 +30,16 @@ const MenuList = ({ open, closeMenu }) => {
     <nav className={classes.list}>
       <ThemeProvider theme={theme}>
         <Menu open={open} onClose={closeMenu} style={{left: '128px', top: '-340px' }} >
-          <MenuItem>
-            Dashboard
-          </MenuItem>
-          <MenuItem>
-            Driving Pattern
-          </MenuItem>
+          <Link to='/' onClick={closeMenu}>
+            <MenuItem>
+              Dashboard
+            </MenuItem>
+          </Link>
+          <Link to='drivingpattern' onClick={closeMenu}>
+            <MenuItem>
+              Driving Pattern
+            </MenuItem>
+          </Link>
         </Menu>
       </ThemeProvider>
     </nav>
