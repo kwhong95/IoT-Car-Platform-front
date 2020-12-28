@@ -1,20 +1,15 @@
 import { makeStyles } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
-  header: {
+const useStyles = makeStyles(theme => ({
+  header : {
     display: 'flex',
-    height: '30px',
-    marginTop: '10',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+    flexGrow: 1,
   },
-  link: {
+  title: {
     display: 'flex',
-    color: '#fafafa',
+    flexGrow: 1,
+    margin: theme.spacing(1),
   },
-  btncolor: {
-    color: '#fafafa',
-  }
-}));
+}))
 
 export default useStyles;

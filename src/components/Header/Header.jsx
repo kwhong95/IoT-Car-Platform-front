@@ -1,54 +1,63 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Breadcrumbs, IconButton, Typography } from '@material-ui/core';
-import { DriveEta, Dashboard, KeyboardArrowDown, Assessment } from '@material-ui/icons';
-
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Typography, IconButton, Breadcrumbs } from '@material-ui/core';
+import { Settings, MenuOpen } from '@material-ui/icons';
 import useStyles from './styles';
-import MenuList from '../MenuList/MenuList';
+import MenuItems from './MenuList/MenuList';
 
+const breadcrumbNameMap = {
+  '/': 'DriverMate',
+  '/dashboard': 'Dashboard',
+  '/drivingpattern': 'Driving Pattern',
+}
 
 const Header = () => {
-  let location = window.location;
   const classes = useStyles();
-  const pathnames = location.pathname.split('/').filter((x) => x);
-  const [open, setOpen] = useState(false);
+  const pathnames = window.location.pathname.split('/').filter((x) => x);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const openMenu = () => {
-    setOpen(true);
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
   }
 
   const closeMenu = () => {
-    setOpen(false);
+    setAnchorEl(false);
   }
-
+  
   return (
     <div className={classes.header}>
-      <Breadcrumbs aria-label="breadcrumb" separator=">">
-        <Link color="inherit" href="/" className={classes.link}>
-          <DriveEta className={classes.icon} />
-          <Typography style={{marginLeft: '5px'}}>Driving Mate</Typography>
-        </Link>
-        <Link color="inherit" href="/" className={classes.link}>
-          {pathnames.length === 0 ? (
-            <>
-              <Dashboard />
-              <Typography style={{marginLeft: '5px'}}>Dashboard</Typography>
-            </>
-          ) : (
-            <>
-              <Assessment />
-              <Typography style={{marginLeft: '5px'}}>Driving Pattern</Typography>
-            </>
-          )
-          }
-        </Link>
-      </Breadcrumbs>
-      <div className={classes.menu}>
-        <IconButton onClick={openMenu} style={{ right: '10px' }}>
-          <KeyboardArrowDown className={classes.btncolor} />
+      <AppBar position="static">
+        <Toolbar>
+        <IconButton onClick={handleClick}>
+          <MenuOpen />
         </IconButton>
-        <MenuList open={open} closeMenu={closeMenu} />
-      </div>
+          <Breadcrumbs className={classes.title} separator=">">
+            <Link to='/'>
+              <Typography>Driver Mate</Typography>
+            </Link>
+            {pathnames.map((value, index) => {
+              const last = index === pathnames.length - 1;
+              const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+
+              return last? (
+                <Typography className={classes.lasttitle} color="textPrimary" key={to}>
+                  {breadcrumbNameMap[to]}
+                </Typography>
+              ):
+              <Link to={to} key={to}>
+                  <Typography>{breadcrumbNameMap[to]}</Typography>
+              </Link>
+            })}
+          </Breadcrumbs>
+          <IconButton>
+            <Settings />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <MenuItems 
+        anchorEl={anchorEl}
+        closeMenu={closeMenu}
+      />
     </div>
   )
 }
